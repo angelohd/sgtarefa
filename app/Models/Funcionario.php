@@ -14,10 +14,10 @@ class Funcionario extends Model
     protected $fillable = ['nome','telefone','categoria_id'];
 
     function getCategoria(){
-        BelongsToMany(Categoria::class,'categoria_id','id');
+        return $this->belongsTo(Categoria::class,'categoria_id','id');
     }
 
     function getTarefa(){
-        BelongsToMany(Tarefa::class,'id','funcionario_id');
+        return $this->belongsTo(Tarefa::class,'id','funcionario_id');
     }
 }

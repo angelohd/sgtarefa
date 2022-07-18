@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerAdmin;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\{Tarefa,Funcionario};
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,13 @@ Route::get('/', function () {
 Route::get('login',[ControllerAdmin::class,'viewlogin'])->name('viewlogin');
 Route::post('login1',[ControllerAdmin::class,'login'])->name('login2');
 Route::middleware(['auth'])->group(function(){
+    
     Route::prefix('sgtarefa')->name('sgtarefa_')->group(function(){
+
+        Route::prefix('funcionarios')->group(function(){
+            Route::get('funcionarios',Funcionario::class)->name('funcionarios');
+        });
+
         Route::get('kanban',function(){
             return view('layout.index');
         })->name('kanban');

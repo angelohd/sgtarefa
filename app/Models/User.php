@@ -46,6 +46,10 @@ class User extends Authenticatable
     ];
 
     function getTarefa(){
-        BelongsToMany(Tarefa::class,'id','user_id');
+        return $this-> belongsTo(Tarefa::class,'id','user_id');
+    }
+
+    function getFuncionario(){
+        return $this-> belongsTo(Funcionario::class,'funcionario_id','id');
     }
 }

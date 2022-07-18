@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Categoria extends Model
 {
@@ -14,6 +12,6 @@ class Categoria extends Model
     protected $fillable = ['categoria'];
 
     function getFuncionario(){
-        BelongsToMany(Funcionario::class,'id','categoria_id');
+        return $this->belongsTo(Funcionario::class,'id','categoria_id');
     }
 }
