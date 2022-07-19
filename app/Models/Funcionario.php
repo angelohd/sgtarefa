@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Funcionario extends Model
 {
@@ -19,5 +17,9 @@ class Funcionario extends Model
 
     function getTarefa(){
         return $this->belongsTo(Tarefa::class,'id','funcionario_id');
+    }
+
+    function getUser(){
+        return $this->belongsTo(User::class,'id','funcionario_id');
     }
 }

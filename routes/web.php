@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerAdmin;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Livewire\{Tarefa,Funcionario};
+use App\Http\Controllers\ControllerFuncionario;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,8 @@ use App\Http\Livewire\{Tarefa,Funcionario};
 
 Route::get('/', function () {
     if(Auth::check()){
-        return redirect()->route('sgtarefa_kanban');
+        return view('layouts.app');
+        // return redirect()->route('tarefa.kanban');
     }
     return redirect()->route('viewlogin');
 })->name('login1');
@@ -26,15 +27,25 @@ Route::get('/', function () {
 Route::get('login',[ControllerAdmin::class,'viewlogin'])->name('viewlogin');
 Route::post('login1',[ControllerAdmin::class,'login'])->name('login2');
 Route::middleware(['auth'])->group(function(){
-    
-    Route::prefix('sgtarefa')->name('sgtarefa_')->group(function(){
 
-        Route::prefix('funcionarios')->group(function(){
-            Route::get('funcionarios',Funcionario::class)->name('funcionarios');
+    Route::prefix('sgtarefa')->group(function(){
+
+        Route::prefix('funcionarios')->name('funcionarios.')->group(function(){
+            Route::get('funcionarios',[ControllerFuncionario::class,'index'])->name('index');
+            Route::post('store',[ControllerFuncionario::class,'store'])->name('store');
+            Route::post('update/{id}',[ControllerFuncionario::class,'update'])->name('update');
         });
 
-        Route::get('kanban',function(){
-            return view('layout.index');
-        })->name('kanban');
+        Route::prefix('tarefas')->name('tarefa.')->group(function(){
+            Route::get('kanban',function(){
+                return view('layouts.app');
+            })->name('kanban');
+        });
+
+        Route::prefix('utilizador')->name('utilizador.')->group(function(){
+            Route::post('logout',[ControllerAdmin::class,'logout'])->name('logout');
+        });
+
+
     });
 });
