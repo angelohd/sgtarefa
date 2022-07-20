@@ -116,6 +116,7 @@
         </div>
       </div>
     </section>
+    @yield('kanban')
   </div>
 
    <footer class="main-footer">
