@@ -64,9 +64,8 @@
             <ul class="nav nav-treeview">
                 @can('kanban')
 
-
               <li class="nav-item">
-                <a href="../index.html" class="nav-link">
+                <a href="{{ route('tarefa.kanban') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Minhas tarefas</p>
                 </a>
@@ -75,7 +74,7 @@
               @can('listtarefa')
 
               <li class="nav-item">
-                <a href="../index2.html" class="nav-link">
+                <a href="{{ route('tarefa.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tarefas</p>
                 </a>

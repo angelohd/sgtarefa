@@ -26,6 +26,9 @@ class Tarefas extends Migration
             $table->date('data_fim');
             $table->time('hora_fim');
             $table->enum('estado',['Agendada','Fazendo','concluido','Aprovado','Reprovado','Perdida','Reijeitada'])->default('Agendada');
+            $table->enum('prioridade',['Urgente','Nao Urgente'])->default('Nao Urgente');
+            $table->timestamp('data_inicializado')->nullable();
+            $table->timestamp('data_finalizado')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

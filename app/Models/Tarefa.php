@@ -10,7 +10,7 @@ class Tarefa extends Model
 {
     use HasFactory;
     protected $table = "tarefas";
-    protected $fillable =['descricao','cor','grau','data_inicio','hora_inicio','data_fim','hora_fim','funcionario_id','user_id'];
+    protected $fillable =['descricao','cor','prioridade','data_inicio','hora_inicio','data_fim','hora_fim','funcionario_id','user_id'];
 
     function getFuncionario(){
         return $this->belongsTo(Funcionario::class,'funcionario_id','id');

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerAdmin;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ControllerFuncionario;
+use App\Http\Controllers\ControllerTarefa;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\ControllerFuncionario;
 
 Route::get('/', function () {
     if(Auth::check()){
-        return view('layouts.app');
+        return redirect()->route('tarefa.kanban');
         // return redirect()->route('tarefa.kanban');
     }
     return redirect()->route('viewlogin');
@@ -37,9 +38,13 @@ Route::middleware(['auth'])->group(function(){
         });
 
         Route::prefix('tarefas')->name('tarefa.')->group(function(){
-            Route::get('kanban',function(){
-                return view('layouts.app');
-            })->name('kanban');
+            Route::get('tarefas',[ControllerTarefa::class,'index'])->name('index');
+            Route::get('nova-tarefa',[ControllerTarefa::class,'create'])->name('create');
+            Route::get('ver-tarefa/{id}',[ControllerTarefa::class,'show'])->name('show');
+            Route::get('edit-tarefa/{id}',[ControllerTarefa::class,'edit'])->name('edit');
+            Route::post('update-tarefa/{id}',[ControllerTarefa::class,'update'])->name('update');
+            Route::post('store-tarefa',[ControllerTarefa::class,'store'])->name('store');
+            Route::get('kanban',[ControllerTarefa::class,'kanban'])->name('kanban');
         });
 
         Route::prefix('utilizador')->name('utilizador.')->group(function(){

@@ -27,7 +27,6 @@
                 @forelse ($categorias as $categoria )
                     <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
                 @empty
-
                 @endforelse
 
                 @endif
