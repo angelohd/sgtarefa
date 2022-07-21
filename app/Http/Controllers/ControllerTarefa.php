@@ -119,6 +119,30 @@ class ControllerTarefa extends Controller
     }
 
     function kanban(){
-        return view('admin.tarefa.kanban');
+        $tarefasAgendadas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
+        ->where('estado','Agendada')
+        ->orderBy('prioridade','asc')
+        ->get();
+
+        $tarefasFazendos = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
+        ->where('estado','Fazendo')
+        ->get();
+
+        $tarefasConcluidos = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
+        ->where('estado','Concluido')
+        ->get();
+        $tarefasAprovadas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
+        ->where('estado','Aprovada')
+        ->get();
+
+        $tarefasReprovadas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
+        ->where('estado','Reprovada')
+        ->get();
+
+        $tarefasPerdidas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
+        ->where('estado','Perdida')
+        ->get();
+
+        return view('admin.tarefa.kanban',['tarefasAgendadas'=>$tarefasAgendadas,'tarefasFazendos'=>$tarefasFazendos,'tarefasConcluidos'=>$tarefasConcluidos,'tarefasAprovadas'=>$tarefasAprovadas,'tarefasReprovadas'=>$tarefasReprovadas,'tarefasPerdidas'=>$tarefasPerdidas]);
     }
 }
