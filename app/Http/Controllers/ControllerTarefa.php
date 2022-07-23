@@ -132,11 +132,11 @@ class ControllerTarefa extends Controller
         ->where('estado','Concluido')
         ->get();
         $tarefasAprovadas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
-        ->where('estado','Aprovada')
+        ->where('estado','Aprovado')
         ->get();
 
         $tarefasReprovadas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
-        ->where('estado','Reprovada')
+        ->where('estado','Reprovado')
         ->get();
 
         $tarefasPerdidas = Tarefa::where('funcionario_id',Auth::user()->getFuncionario->id)
@@ -168,13 +168,17 @@ class ControllerTarefa extends Controller
     function aprovar_tarefa(Request $request){
         Tarefa::where('id',$request->id)->update([
             'estado'=>'Aprovado',
+            'data_correcao'=>date('Y-m-d H:m:i'),
         ]);
+        return "success";
     }
 
     function reprovar_tarefa(Request $request){
         Tarefa::where('id',$request->id)->update([
             'estado'=>'Reprovado',
+            'data_correcao'=>date('Y-m-d H:m:i'),
         ]);
+        return "success";
     }
 
     function perder_tarefa(Request $request){
@@ -187,6 +191,7 @@ class ControllerTarefa extends Controller
         Tarefa::where('id',$request->id)->update([
             'estado'=>'Reijeitada',
         ]);
+        return "success";
     }
 
     public function concluidas()

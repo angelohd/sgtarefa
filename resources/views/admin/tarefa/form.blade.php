@@ -108,17 +108,17 @@
 
        </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label>Inicializado em:</label>
                     <input type="text" class="form-control" value="{{ $tarefa->data_inicializado }}">
                 </div>
             </div>
-            @if($tarefa->estado == "concluido")
+            @if($tarefa->estado == "concluido" || $tarefa->estado == "Aprovado" || $tarefa->estado == "Reprovado")
 
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label>Finalizado em:</label>
                     <input type="text" class="form-control" value="{{ $tarefa->data_finalizado }}">
@@ -126,9 +126,15 @@
             </div>
             @endif
 
-           </div>
-
-
+            @if($tarefa->estado == "Aprovado" || $tarefa->estado == "Reprovado")
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Corrigido em:</label>
+                    <input type="text" class="form-control" value="{{ $tarefa->data_correcao }}">
+                </div>
+            </div>
+            @endif
+        </div>
     </div>
     @endif
 
@@ -136,20 +142,19 @@
         <div class="card-footer">
             <a href="{{ route('tarefa.index')}}" class="btn btn-info"> Ver Todas as tarefas</a>
             @if(isset($detalhes))
-            @if($tarefa->estado == "Agendada")
-                @can('updatetarefa')
-                <a href="{{ route('tarefa.edit',$tarefa->id)}}" class="btn btn-success">Editar</a>
-                @endcan
-            @endif
+                @if($tarefa->estado == "Agendada")
+                    @can('updatetarefa')
+                    <a href="{{ route('tarefa.edit',$tarefa->id)}}" class="btn btn-success">Editar</a>
+                    @endcan
+                @endif
+                @if($tarefa->estado == "concluido")
+                    <button class="btn btn-primary" type="button" onclick="aprovar_tarefa({{ $tarefa->id }})">Aprovar</button>
+                    <button class="btn btn-danger" type="button" onclick="reprovar_tarefa({{ $tarefa->id }})">Reprovar</button>
+                @endif
             @else
             <button class="btn btn-primary" type="submit">Salvar</button>
             @endif
-            @if($tarefa->estado == "concluido")
-                <button class="btn btn-primary" type="button">Aprovar</button>
-                <button class="btn btn-danger" type="button">Reprovar</button>
-            @endif
         </div>
     </div>
-
-
 </div>
+@include('admin.tarefa.acoes')

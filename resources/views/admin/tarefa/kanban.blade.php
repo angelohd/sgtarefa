@@ -151,7 +151,6 @@
                         </div>
                         <div class="card-footer">
                             <label>Prioridade: {{ $tarefa->prioridade }}</label><br>
-                            <button class="btn btn-primary" type="button">Mais detalahes ...</button>
                           </div>
                       </div>
                     @empty
@@ -176,7 +175,6 @@
                         </div>
                         <div class="card-footer">
                             <label>Prioridade: {{ $tarefa->prioridade }}</label><br>
-                            <button class="btn btn-primary" type="button">Mais detalahes ...</button>
                           </div>
                       </div>
                     @empty
@@ -201,7 +199,6 @@
                         </div>
                         <div class="card-footer">
                             <label>Prioridade: {{ $tarefa->prioridade }}</label><br>
-                            <button class="btn btn-primary" type="button">Mais detalahes ...</button>
                           </div>
                       </div>
                     @empty
