@@ -2,26 +2,12 @@
 @section('conteudo')
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Lista de tarefas</h3>
+      <h3 class="card-title">tarefas concluida</h3>
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <ul class="navbar-nav ml-auto">
-        <div class="row">
-            <div class="col-sm-4">
-                @can('addtarefa')
-                <a href="{{ route('tarefa.create') }}" class="btn btn-primary">Nova tarefa</a>
-                @endcan
-            </div>
-
-            <div class="col-sm-4">
-                @can('addtarefa')
-                <a href="{{ route('tarefa.concluidas') }}" class="btn btn-info">tarefas concluidas</a>
-                @endcan
-            </div>
-
-        </div>
-
-
-
+        @can('addtarefa')
+        <a href="{{ route('tarefa.index') }}" class="btn btn-primary">Listar tarefas</a>
+        @endcan
 
       </ul>
       </nav>

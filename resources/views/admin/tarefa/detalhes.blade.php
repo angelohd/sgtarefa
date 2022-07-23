@@ -61,35 +61,3 @@
     <label for="" id="demo"></label>
 
 </div>
-
-@section('js')
-<script>
-   function tempo(data_inicio,hora_inicio,data_fim,hora_fin){
-    const datainicial = data_inicio+" "+hora_inicio
-    const datafinal = data_fim+" "+hora_fin
-
-    var deadline = new Date(datainicial).getTime();
-    var x = setInterval(function() {
-
-        var now =  new Date(datafinal).getTime();
-        var t = deadline - now;
-        var days = Math.floor(t / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
-        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((t % (1000 * 60)) / 1000);
-        document.getElementById("dia").innerHTML =days ;
-        document.getElementById("hora").innerHTML =hours;
-        document.getElementById("minuto").innerHTML = minutes;
-        document.getElementById("segundo").innerHTML =seconds;
-        if (t < 0) {
-                clearInterval(x);
-                document.getElementById("demo").innerHTML = "TIME UP";
-                document.getElementById("dia").innerHTML ='0';
-                document.getElementById("hora").innerHTML ='0';
-                document.getElementById("minuto").innerHTML ='0' ;
-                document.getElementById("segundo").innerHTML = '0'; }
-        }, 1000);
-    // alert(datainicial)
-   }
-</script>
-@endsection

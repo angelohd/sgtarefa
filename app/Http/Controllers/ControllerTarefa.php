@@ -145,4 +145,53 @@ class ControllerTarefa extends Controller
 
         return view('admin.tarefa.kanban',['tarefasAgendadas'=>$tarefasAgendadas,'tarefasFazendos'=>$tarefasFazendos,'tarefasConcluidos'=>$tarefasConcluidos,'tarefasAprovadas'=>$tarefasAprovadas,'tarefasReprovadas'=>$tarefasReprovadas,'tarefasPerdidas'=>$tarefasPerdidas]);
     }
+
+    // 'Agendada','Fazendo','concluido','Aprovado','Reprovado','Perdida','Reijeitada'
+
+    function iniciar_tarefa(Request $request){
+        Tarefa::where('id',$request->id)->update([
+            'estado'=>'Fazendo',
+            'data_inicializado'=>date('Y-m-d H:m:i'),
+        ]);
+
+        return "success";
+    }
+
+    function concluir_tarefa(Request $request){
+        Tarefa::where('id',$request->id)->update([
+            'estado'=>'concluido',
+            'data_finalizado'=>date('Y-m-d H:m:i'),
+        ]);
+        return "success";
+    }
+
+    function aprovar_tarefa(Request $request){
+        Tarefa::where('id',$request->id)->update([
+            'estado'=>'Aprovado',
+        ]);
+    }
+
+    function reprovar_tarefa(Request $request){
+        Tarefa::where('id',$request->id)->update([
+            'estado'=>'Reprovado',
+        ]);
+    }
+
+    function perder_tarefa(Request $request){
+        Tarefa::where('id',$request->id)->update([
+            'estado'=>'Perdida',
+        ]);
+    }
+
+    function reijar_tarefa(Request $request){
+        Tarefa::where('id',$request->id)->update([
+            'estado'=>'Reijeitada',
+        ]);
+    }
+
+    public function concluidas()
+    {
+        $tarefas = Tarefa::where('estado','concluido')->get();
+        return view('admin.tarefa.concluido',['tarefas'=>$tarefas]);
+    }
 }

@@ -45,6 +45,11 @@ Route::middleware(['auth'])->group(function(){
             Route::post('update-tarefa/{id}',[ControllerTarefa::class,'update'])->name('update');
             Route::post('store-tarefa',[ControllerTarefa::class,'store'])->name('store');
             Route::get('kanban',[ControllerTarefa::class,'kanban'])->name('kanban');
+            Route::post('iniciar/tarefa',[ControllerTarefa::class,'iniciar_tarefa'])->name('iniciar_tarefa');
+            Route::post('concluir/tarefa',[ControllerTarefa::class,'concluir_tarefa'])->name('concluir_tarefa');
+            Route::get('concluidas',[ControllerTarefa::class,'concluidas'])->name('concluidas');
+            Route::post('aprovar/tarefa',[ControllerTarefa::class,'aprovar_tarefa'])->name('aprovar_tarefa');
+            Route::post('reprovar/tarefa',[ControllerTarefa::class,'reprovar_tarefa'])->name('reprovar_tarefa');
         });
 
         Route::prefix('utilizador')->name('utilizador.')->group(function(){

@@ -27,8 +27,11 @@ class Tarefas extends Migration
             $table->time('hora_fim');
             $table->enum('estado',['Agendada','Fazendo','concluido','Aprovado','Reprovado','Perdida','Reijeitada'])->default('Agendada');
             $table->enum('prioridade',['Urgente','Nao Urgente'])->default('Nao Urgente');
-            $table->timestamp('data_inicializado')->nullable();
-            $table->timestamp('data_finalizado')->nullable();
+            $table->timestamp('data_inicializado')->nullable(); //data em que eh tarefa iniciada
+            $table->timestamp('data_finalizado')->nullable(); //data em que a tarefa eh finalizada
+            $table->timestamp('data_correcao')->nullable(); //data da corecao aprovado e reprovado
+            $table->timestamp('data_rejeitar')->nullable(); //data em que a terefa foi rejeitada
+            $table->timestamp('data_perder')->nullable(); //data em que a tarefa foi perdida
             $table->timestamps();
             $table->softDeletes();
         });

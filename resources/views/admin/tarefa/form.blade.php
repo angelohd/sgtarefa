@@ -86,7 +86,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Publicado por:</label>
-            <input type="text" class="form-control" required value="{{ $tarefa->getUser->getFuncionario->nome }}">
+            <input type="text" class="form-control" value="{{ $tarefa->getUser->getFuncionario->nome }}">
         </div>
 
     </div>
@@ -95,18 +95,40 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Publicado em:</label>
-                <input type="text" class="form-control" required value="{{ $tarefa->created_at }}">
+                <input type="text" class="form-control" value="{{ $tarefa->created_at }}">
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group">
                 <label>Estado:</label>
-                <input type="text" class="form-control" required value="{{ $tarefa->estado }}">
+                <input type="text" class="form-control" value="{{ $tarefa->estado }}">
             </div>
         </div>
 
        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Inicializado em:</label>
+                    <input type="text" class="form-control" value="{{ $tarefa->data_inicializado }}">
+                </div>
+            </div>
+            @if($tarefa->estado == "concluido")
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Finalizado em:</label>
+                    <input type="text" class="form-control" value="{{ $tarefa->data_finalizado }}">
+                </div>
+            </div>
+            @endif
+
+           </div>
+
+
     </div>
     @endif
 
@@ -121,6 +143,10 @@
             @endif
             @else
             <button class="btn btn-primary" type="submit">Salvar</button>
+            @endif
+            @if($tarefa->estado == "concluido")
+                <button class="btn btn-primary" type="button">Aprovar</button>
+                <button class="btn btn-danger" type="button">Reprovar</button>
             @endif
         </div>
     </div>
