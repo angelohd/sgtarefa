@@ -51,6 +51,7 @@
     </div>
   </div>
 </div>
+
 <!-- jQuery -->
 <script src="{{ url('dist/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
